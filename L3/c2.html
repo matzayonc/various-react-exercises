@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+<body>
+<div id="react-app"></div>
+
+<script type="text/babel">
+
+class MySelect extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = props
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(ev){
+        this.state.handleSelect(ev.target.value)
+    }
+
+    render(){
+
+        let tab = []
+        
+        for(let i of this.state.options)
+            tab.push(<option key={i.id} value={i.name}>{i.name}</option>)
+        
+        return <select onChange={this.handleChange}>{tab}</select>
+    }
+}
+            
+
+
+
+    class MyForm extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = this.defaults()
+            this.onHandleSelect = this.onHandleSelect.bind(this)
+        }
+
+        defaults(){
+            return {
+                books: [
+                    { id: 0, name: "hamlet" },
+                    { id: 1, name: "krzyzacy" },
+                    { id: 2, name: "lalka" }
+                ],
+                cities: [
+                    { id: 0, name: "Kraków" },
+                    { id: 1, name: "Warszawa" },
+                    { id: 2, name: "Gdańsk" },
+                    { id: 3, name: "Toruń" }
+                ],
+                selected: []
+            }
+        }
+
+        onHandleSelect(value) {
+            
+            let updated = this.state.selected
+            updated.push(value)
+            this.setState({ selected: updated})
+            console.log(value, this.state)
+        }
+
+        render() {
+            return (
+                <form>
+                    <MySelect handleSelect={this.onHandleSelect} options={this.state.books}/>
+                    <MySelect handleSelect={this.onHandleSelect} options={this.state.cities}/>
+                    <p>{JSON.stringify(this.state.selected)}</p>
+                </form>
+            )
+        }
+    }
+
+   
+
+    ReactDOM.render(
+            <div><MyForm /><MyForm /></div>,         
+            document.getElementById('react-app')
+        );
+
+</script>
+</body>
+</html>

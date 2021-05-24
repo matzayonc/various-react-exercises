@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+<body>
+    Results are in the console
+<div id="react-app"></div>
+
+<script type="text/babel">
+            
+    class Square extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {a:1, b:2, c: 3};
+        }
+        click() {
+            console.log('klik');
+            this.setState({a:2})
+            console.log(this.state)
+        }
+        render() {
+            return <button onClick={()=>this.click()}>klik</button>;
+        }
+    }
+
+    ReactDOM.render(
+            <Square />,
+            document.getElementById('react-app')
+        );
+
+</script>
+</body>
+</html>

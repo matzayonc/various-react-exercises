@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+<body>
+<div id="react-app"></div>
+
+<script type="text/babel">
+
+class MyCheckbox extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            checked: props.checked,
+            value: props.value,
+            send: props.callback
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(ev){
+        this.setState({checked: ev.target.checked})
+        this.state.send(this.state.value * (ev.target.checked? 1: -1))
+    }
+
+    render(){
+        let val = this.state.value
+        
+
+        return (<label>{val}<input
+                name={val}
+                type="checkbox"
+                value={val}
+                checked={this.state.checked}
+                onChange={this.handleChange}
+                /></label>)
+    }
+}
+            
+
+    class MyForm extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = this.defaults()
+            this.state.sum = this.calcStartSum()
+            this.onHandleCheck = this.onHandleCheck.bind(this)
+            this.calcStartSum()
+        }
+
+        defaults(){
+            return {
+                boxes: [
+                    { checked: false, value: 1 },
+                    { checked: true, value: 2 },
+                    { checked: false, value: 3 },
+                    { checked: true, value: 10 },
+                    { checked: false, value: 20 },
+                ],
+                sum: 0
+            }
+        }
+
+        onHandleCheck(value) {
+            console.log(value)
+            this.setState({sum: this.state.sum + value})
+        }
+
+        calcStartSum(){
+            let sum = 0
+
+            for(let i of this.defaults().boxes)
+                if(i.checked)
+                        sum += i.value
+
+            return sum
+        }
+
+        render() {
+
+            let checkboxes = []
+                for(let i of this.state.boxes)
+                    checkboxes.push(<MyCheckbox 
+                        key={i.value} 
+                        onHandleCheck={this.onHandleCheck} 
+                        checked={i.checked} 
+                        value={i.value}
+                        callback={this.onHandleCheck}
+                    />)
+                
+
+
+            return(
+                <form>        
+                    {checkboxes}            
+                    <div>Suma: {this.state.sum}</div>
+                </form>
+            )
+        }
+    }
+
+   
+
+    ReactDOM.render(
+            <div><MyForm /><MyForm /></div>,         
+            document.getElementById('react-app')
+        );
+
+</script>
+</body>
+</html>

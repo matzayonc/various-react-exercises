@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+        .div{
+            width: 100px;
+            border: 2px solid black;
+        }
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+<body>
+<div id="react-app"></div>
+
+<script type="text/babel">
+
+
+        
+    class Box extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {w:100, h:100, c:"#aaaaaa"}
+        }
+
+        randomize(){
+            let color = '#' + (parseInt(Math.random()*256*256*256)).toString(16);
+            while(color.length<7)
+                color += '0'
+            this.setState({h:parseInt(Math.random()*100)+100, c:color})
+        }
+
+        render() {
+            return (
+                <div onClick={()=>this.randomize()} className="div" style={
+                    {
+                        height: this.state.h + 'px',
+                        background:this.state.c
+                    }}>
+                </div>
+                )
+        }
+                 
+
+    }    
+    
+    class Shelf extends React.Component {
+        render() {
+            return <div><Box/><Box/><Box/></div>
+        }
+    }
+
+
+
+    
+
+    ReactDOM.render(
+            <Shelf/>,
+            document.getElementById('react-app')
+        );
+
+</script>
+</body>
+</html>

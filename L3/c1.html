@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+<body>
+<div id="react-app"></div>
+
+<script type="text/babel">
+
+
+            
+    class MyForm extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {data:''}
+            
+            this.handleChange = this.handleChange.bind(this)      
+        }
+
+        handleChange(ev) {
+            this.setState({data: ev.target.value.toUpperCase()});
+        }
+
+        render(){
+            return (
+                <form onSubmit={this.handleChange}>
+                    <input type="text" value={this.state.data} onChange={this.handleChange} />
+                    <input type="submit" value="send" />
+                </form>
+            )
+        }
+    }
+
+   
+
+    ReactDOM.render(
+            <MyForm />,
+            document.getElementById('react-app')
+        );
+
+</script>
+</body>
+</html>

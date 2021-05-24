@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+<body>
+<div id="react-app"></div>
+
+<script type="text/babel">
+
+
+        
+    class Food extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {list: this.props.foods};
+            //randomFood: this.randomize(false)
+        }
+
+        randomize(set=true){
+            console.log("randomize")
+            let num =  parseInt(Math.random()*this.state.list.length)
+            let food = this.state.list[num]
+            if(set)
+                this.setState({randomFood:food})
+            console.log('randomFood: ', food)
+            return food
+        }
+
+        render() {
+            return (
+                <div>
+                    <button onClick={()=>this.randomize()}>klik</button>
+                    <br/>{this.state.randomFood}
+                </div>
+                )
+        }
+    }
+    
+    class FoodList extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {list:["masło", "mleko", "chleb", "dżem"]};
+        }
+
+        render() {
+            return (
+                <div>
+                <Food foods={ this.state.list }/>
+                <Food foods={ this.state.list }/>
+                <Food foods={ this.state.list }/>
+
+                </div>
+            )
+        }
+    }
+
+
+
+    
+
+    ReactDOM.render(
+            <FoodList/>,
+            document.getElementById('react-app')
+        );
+
+</script>
+</body>
+</html>

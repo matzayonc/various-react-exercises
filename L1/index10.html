@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+</head>
+<body>
+    <div id="react-app"></div>
+
+    <script type="text/babel">
+
+        let items = [
+                {id: 1, quantity: 1, name: "masło"},
+                {id: 2, quantity: 2, name: "powidła"},
+                {id: 3, quantity: 1, name: "ser"}
+            ]
+
+        class List extends React.Component {
+            render() {
+
+                let place = "city"
+                let info = "of angels" 
+
+                return (
+                    <div>
+                        <ListItem quantity={items[0].quantity} name={items[0].name} />
+                        <ListItem quantity={items[1].quantity} name={items[1].name} />
+                        <ListItem quantity={items[2].quantity} name={items[2].name} />
+
+                    </div>
+                );
+            }
+        }
+
+
+        class List2 extends React.Component {
+            render() {
+
+                let list = []
+                for (let i of items)
+                    list.push(<ListItem key={i.id} quantity={i.quantity} name={i.name} />)
+
+
+                return <div>{list}</div>
+            }
+        }
+
+        class ListItem extends React.Component {
+            render() {
+                return (            
+                <div>
+                    {this.props.quantity} x {this.props.name}            
+                </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            React.createElement('div', {}, <List/>, <br/>, <List2/>),
+            document.getElementById('react-app')
+        );
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div id="react-app"></div>
+
+    <script>
+        let square = React.createElement("div", {
+                    style: {
+                    width: "100px",
+                    height: "100px",
+                    backgroundColor: "red", // nie: background-color
+                    color:"white",
+                    fontSize:"20px",
+                    margin:"2px",
+                    margin: '6px',
+                    float: 'left'
+                }
+            },
+                "Square"
+        )
+
+        let row = React.createElement('div', {
+                style: {
+                    border: '4px solid blue',
+                    margin: '6px',
+                    float: 'right'
+                }
+            },
+            square, square, square
+
+        )
+
+        let table = React.createElement('div', {
+                style: {
+                    border: '4px solid purple',
+                    margin: '6px',
+                    float: 'left'
+                }
+            },
+            row, row, row
+
+        )
+
+        let container = React.createElement('div', {
+                style: {
+                    border: '4px solid pink',
+                    margin: '6px',
+                    float: 'left'
+                }
+            },
+            table, table, table
+
+        )
+
+        ReactDOM.render(
+            container,
+            document.getElementById('react-app')
+        )
+
+    </script>
+</body>
+</html>

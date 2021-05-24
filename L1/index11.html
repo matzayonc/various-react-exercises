@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+        img{
+            width: 30%;
+            margin: 1%;
+        }
+        .book{
+            float: left        
+        }
+
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+</head>
+<body>
+    <div id="react-app"></div>
+
+    <script type="text/babel">
+
+        let imagesData = [
+            {id:1, name:"hamlet" },
+            {id:2, name:"krzyzacy" },
+            {id:3, name:"lalka" }
+        ] 
+
+        class Image  extends React.Component {
+            makeImageName(name){
+                return name[0].toUpperCase() + name.substr(1)
+            }
+
+            makeImageUrl(name){
+                return "gfx/"+name+".jpg"
+            }
+
+
+            render(){
+                let name = this.props.name
+                return (
+                    <div className="book">
+                        <label>{this.makeImageName(name)}</label>
+                        <img src={this.makeImageUrl(name)}></img>
+
+                    </div>
+                )
+            }
+        }
+
+        class ImagesList extends React.Component {
+            render(){
+                let list = []
+
+                for(let i of imagesData){
+                    list.push(<Image key={i.id} name={i.name}/>)
+                }
+
+                return <div>{list}</div>
+            }
+        }
+
+        ReactDOM.render(
+            <ImagesList/>,
+            document.getElementById('react-app')
+        );
+
+
+    </script>
+</body>
+</html>

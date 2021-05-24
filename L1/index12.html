@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <style>
+        .square{
+            width: min(10vw,10vh);
+            height: min(10vw,10vh);
+            background-color: green;
+            text-align: center;
+            color: white;
+            margin: 2px;
+        }
+        .column{
+            border: 2px solid darkorchid;
+            float: left        
+        }
+    </style>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+</head>
+<body>
+    <div id="react-app"></div>
+
+    <script type="text/babel">
+
+        class Square extends React.Component {
+            render(){
+                return <div className="square">React comp</div>
+            }
+        }
+
+        class Column extends React.Component {
+            render(){
+                return <div className="column"><Square/><Square/><Square/></div>
+            }
+        }
+
+        ReactDOM.render(
+            <Column/>,
+            document.getElementById('react-app')
+        );
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ćwiczenie React</title>
+
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+
+    <style>
+        .klasa1  {
+            color: blue;
+        }
+        .klasa2 {
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="react-app"></div>
+
+    <script>
+
+        let h1 = React.createElement("h1", { className: "klasa1" }, "React component h1" )
+        let h2 = React.createElement("h2", { className: "klasa2" }, "React component h2" )
+
+        let root = React.createElement("div", {}, h1, h2)
+
+        ReactDOM.render(
+            root,
+            document.getElementById('react-app')
+        )
+
+    </script>
+</body>
+</html>
